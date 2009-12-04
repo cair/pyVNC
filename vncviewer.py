@@ -370,9 +370,8 @@ class VNCFactory(rfb.RFBFactory):
 
 
     def buildProtocol(self, addr):
-        host, port = addr[1:]
-        display = port - 5900
-        pygame.display.set_caption('Python VNC Viewer on %s:%s' % (host, display))
+        display = addr.port - 5900
+        pygame.display.set_caption('Python VNC Viewer on %s:%s' % (addr.host, display))
         return rfb.RFBFactory.buildProtocol(self, addr)
 
     def clientConnectionLost(self, connector, reason):

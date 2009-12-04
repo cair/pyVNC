@@ -14,7 +14,8 @@ from struct import pack, unpack
 import crippled_des
 from twisted.python import usage, log
 from twisted.internet.protocol import Factory, Protocol
-from twisted.internet import app, protocol
+from twisted.internet import protocol
+from twisted.application import internet, service
 
 #~ from twisted.internet import reactor
 
@@ -630,10 +631,14 @@ if __name__ == '__main__':
     host = o.opts['host']
     port = int(o.opts['display']) + 5900
 
-    application = app.Application("rfb test")
+    application = service.Application("rfb test") # create Application
 
     # connect to this host and port, and reconnect if we get disconnected
-    application.connectTCP(host, port, RFBFactory())
+    vncClient = internet.TCPClient(host, port, RFBFactory()) # create the service
+    vncClient.setServiceParent(application)
 
-    # run bot
-    application.run(save=0)
+    # this file should be run as 'twistd -y rfb.py' but it didn't work -
+    # could't import crippled_des.py, so using this hack
+    from twisted.internet import reactor
+    vncClient.startService()
+    reactor.run()

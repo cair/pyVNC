@@ -494,7 +494,7 @@ class RFBClient(Protocol):
         self.transport.write(pack("!BBHHHH", 3, incremental, x, y, width, height))
 
     def keyEvent(self, key, down=1):
-        """For most ordinary keys, the “keysym” is the same as the corresponding ASCII value.
+        """For most ordinary keys, the "keysym" is the same as the corresponding ASCII value.
         Other common keys are shown in the KEY_ constants."""
         self.transport.write(pack("!BBxxI", 4, down, key))
 

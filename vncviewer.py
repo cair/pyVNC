@@ -376,11 +376,11 @@ class VNCFactory(rfb.RFBFactory):
         return rfb.RFBFactory.buildProtocol(self, addr)
 
     def clientConnectionLost(self, connector, reason):
-        log.write("connection lost: %r" % reason.getErrorMessage())
+        log.msg("connection lost: %r" % reason.getErrorMessage())
         reactor.stop()
 
     def clientConnectionFailed(self, connector, reason):
-        log.write("cannot connect to server: %r\n" % reason.getErrorMessage())
+        log.msg("cannot connect to server: %r\n" % reason.getErrorMessage())
         reactor.stop()
 
 class Options(usage.Options):

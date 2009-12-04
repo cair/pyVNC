@@ -121,11 +121,11 @@ class RFBClient(Protocol):
                 maj, min = [int(x) for x in buffer[3:-1].split('.')]
                 #~ print maj, min
                 if (maj, min) != (3, 3):
-                    log.write("wrong protocol version\n")
+                    log.msg("wrong protocol version\n")
                     self.transport.loseConnection()
             buffer = buffer[12:]
             self.transport.write('RFB 003.003\n')
-            log.write("connected\n")
+            log.msg("connected\n")
             self._packet[:] = [buffer]
             self._packet_len = len(buffer)
             self._handler = self._handleExpected
@@ -145,14 +145,14 @@ class RFBClient(Protocol):
         elif auth == 2:
             self.expect(self._handleVNCAuth, 16)
         else:
-            log.write("unknown auth response (%d)\n" % auth)
+            log.msg("unknown auth response (%d)\n" % auth)
 
     def _handleConnFailed(self):
         (waitfor,) = unpack("!I", block)
         self.expect(self._handleConnMessage, waitfor)
 
     def _handleConnMessage(self, block):
-        log.write("Connection refused: %r\n" % block)
+        log.msg("Connection refused: %r\n" % block)
 
     def _handleVNCAuth(self, block):
         self._challenge = block
@@ -182,7 +182,7 @@ class RFBClient(Protocol):
             slef.vncAuthFailed("too many tries to log in")
             self.transport.loseConnection()
         else:
-            log.write("unknown auth response (%d)\n" % auth)
+            log.msg("unknown auth response (%d)\n" % auth)
         
     def _doClientInitialization(self):
         self.transport.write(pack("!B", self.factory.shared))
@@ -216,7 +216,7 @@ class RFBClient(Protocol):
         elif msgid == 3:
             self.expect(self._handleServerCutText, 7)
         else:
-            log.write("unknown message received (id %d)\n" % msgid)
+            log.msg("unknown message received (id %d)\n" % msgid)
             self.expect(self._handleConnection, 1)
         
     def _handleFramebufferUpdate(self, block):
@@ -250,7 +250,7 @@ class RFBClient(Protocol):
             #~ elif encoding == ZRLE_ENCODING:
                 #~ self.expect(self._handleDecodeZRLE, )
             else:
-                log.write("unknown encoding received (encoding %d)\n" % encoding)
+                log.msg("unknown encoding received (encoding %d)\n" % encoding)
                 self._doConnection()
         else:
             self._doConnection()
@@ -455,14 +455,14 @@ class RFBClient(Protocol):
             while len(buffer) >= self._expected_len:
                 self._already_expecting = 1
                 block, buffer = buffer[:self._expected_len], buffer[self._expected_len:]
-                #~ log.write("handle %r with %r\n" % (block, self._expected_handler.__name__))
+                #~ log.msg("handle %r with %r\n" % (block, self._expected_handler.__name__))
                 self._expected_handler(block, *self._expected_args, **self._expected_kwargs)
             self._packet[:] = [buffer]
             self._packet_len = len(buffer)
             self._already_expecting = 0
     
     def expect(self, handler, size, *args, **kwargs):
-        #~ log.write("expect(%r, %r, %r, %r)\n" % (handler.__name__, size, args, kwargs))
+        #~ log.msg("expect(%r, %r, %r, %r)\n" % (handler.__name__, size, args, kwargs))
         self._expected_handler = handler
         self._expected_len = size
         self._expected_args = args
@@ -524,7 +524,7 @@ class RFBClient(Protocol):
         """a password is needed to log on, use sendPassword() to
            send one."""
         if self.factory.password is None:
-            log.write("need a password\n")
+            log.msg("need a password\n")
             self.transport.loseConnection()
             return
         self.sendPassword(self.factory.password)
@@ -532,7 +532,7 @@ class RFBClient(Protocol):
     def vncAuthFailed(self, reason):
         """called when the authentication failed.
            the connection is closed."""
-        log.write("Cannot connect: %s\n" % reason)
+        log.msg("Cannot connect: %s\n" % reason)
 
     def beginUpdate(self):
         """called before a series of updateRectangle(),

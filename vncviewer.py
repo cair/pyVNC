@@ -277,17 +277,18 @@ class RFBToGUI(rfb.RFBClient):
 
     def beginUpdate(self):
         """begin series of display updates"""
-        self.screen.lock()
+        #~ log.msg("screen lock")
 
     def commitUpdate(self, rectangles = None):
         """finish series of display updates"""
-        self.screen.unlock()
+        #~ log.msg("screen unlock")
         pygame.display.update(rectangles)
         self.framebufferUpdateRequest(incremental=1)
 
     def updateRectangle(self, x, y, width, height, data):
         """new bitmap data"""
         #~ print "%s " * 5 % (x, y, width, height, len(data))
+        #~ log.msg("screen update")
         self.screen.blit(
             pygame.image.fromstring(data, (width, height), 'RGBX'),     #TODO color format
             (x, y)

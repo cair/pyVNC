@@ -6,7 +6,7 @@ See vncviewer.py for an example.
 
 (C) 2003 cliechti@gmx.net
 
-Python License
+MIT License
 """
 
 import sys

@@ -1,12 +1,12 @@
-Pyhon VNC Viewer
+Python VNC Viewer
 ----------------
-This project uses Twisted-Pyton and PyGame to build a simple
+This project uses Twisted-Python and PyGame to build a simple
 VNC viewer. The viewer supports the following encodings:
   Hextile, CoRRE, RRE, RAW, CopyRect
 
 The display is done using PyGame because of it's good graphics
 performance but any GUI system can be used as the code is modular
-and can easily adapted. Clippboard transfer is supported but not
+and can easily adapted. Clipboard transfer is supported but not
 used in the sample application.
 
 Usage
@@ -58,8 +58,10 @@ References:
   http://www.realvnc.org
 
 -------
-(C) 2003 chris <cliechti@gmx.net>
-Released as free software under the Python License.
+(c) 2003 chris <cliechti@gmx.net>
+(c) 2009 techtonik <techtonik@gmail.com>
+
+Released under the MIT License.
 
 You're free to use it for commercial and noncommercial
 application, modify and redistribute it as long as the
@@ -67,7 +69,8 @@ copyright notices are intact. There are no warranties, not
 even that it does what it says to do ;-)
 
 
-Changes
+Changes:
+--------
 2003.3.3 - 1. public release
 2003.3.4 - 2. release
  * improved performance with RRE, CoRRE

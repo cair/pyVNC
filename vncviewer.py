@@ -4,7 +4,7 @@ Python VNC Viewer
 PyGame version
 (C) 2003 <cliechti@gmx.net>
 
-Python License
+MIT License
 """
 
 #twisted modules

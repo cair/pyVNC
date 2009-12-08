@@ -35,7 +35,6 @@ ZRLE_ENCODING =                 16
 
 #keycodes
 #for KeyEvent()
-KEY_Escape =    0xFF1B
 KEY_BackSpace = 0xff08
 KEY_Tab =       0xff09
 KEY_Return =    0xff0d

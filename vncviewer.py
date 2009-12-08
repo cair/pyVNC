@@ -38,6 +38,9 @@ POINTER = tuple([(8,8), (4,4)] + list(pygame.cursors.compile((
 
 #keyboard mappings pygame -> vnc
 KEYMAPPINGS = {
+    K_BACKSPACE:        rfb.KEY_BackSpace,
+    K_TAB:              rfb.KEY_Tab,
+    K_RETURN:           rfb.KEY_Return,
     K_ESCAPE:           rfb.KEY_Escape,
     K_KP0:              rfb.KEY_KP_0,
     K_KP1:              rfb.KEY_KP_1,

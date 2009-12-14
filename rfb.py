@@ -4,6 +4,9 @@ RFB protocol implementattion, client side.
 Override RFBClient and RFBFactory in your application.
 See vncviewer.py for an example.
 
+Reference:
+http://www.realvnc.com/docs/rfbproto.pdf
+
 (C) 2003 cliechti@gmx.net
 
 MIT License
@@ -11,7 +14,7 @@ MIT License
 
 import sys
 from struct import pack, unpack
-import crippled_des
+import pyDes
 from twisted.python import usage, log
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet import protocol
@@ -161,11 +164,8 @@ class RFBClient(Protocol):
     def sendPassword(self, password):
         """send password"""
         pw = (password + '\0' * 8)[:8]        #make sure its 8 chars long, zero padded
-        #~ des = Crypto.Cipher.DES.new(pw)
-        #~ response = des.encrypt(challenge)
-        des = crippled_des.DesCipher(pw)
-        response = des.encrypt(self._challenge[:8]) +\
-                   des.encrypt(self._challenge[8:])
+        des = RFBDes(pw)
+        response = des.encrypt(self._challenge)
         self.transport.write(response)
     
     def _handleVNCAuthResult(self, block):
@@ -578,6 +578,23 @@ class RFBFactory(protocol.ClientFactory):
         self.password = password
         self.shared = shared
 
+class RFBDes(pyDes.des):
+    def setKey(self, key):
+        """RFB protocol for authentication requires client to encrypt
+           challenge sent by server with password using DES method. However,
+           bits in each byte of the password are put in reverse order before
+           using it as encryption key."""
+        newkey = []
+        for ki in range(len(key)):
+            bsrc = ord(key[ki])
+            btgt = 0
+            for i in range(8):
+                if bsrc & (1 << i):
+                    btgt = btgt | (1 << 7-i)
+            newkey.append(chr(btgt))
+        super(RFBDes, self).setKey(newkey)
+
+
 # --- test code only, see vncviewer.py
 
 if __name__ == '__main__':
@@ -637,7 +654,8 @@ if __name__ == '__main__':
     vncClient.setServiceParent(application)
 
     # this file should be run as 'twistd -y rfb.py' but it didn't work -
-    # could't import crippled_des.py, so using this hack
+    # could't import crippled_des.py, so using this hack.
+    # now with crippled_des.py replaced with pyDes this can be no more actual
     from twisted.internet import reactor
     vncClient.startService()
     reactor.run()

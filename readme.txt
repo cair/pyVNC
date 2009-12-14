@@ -83,3 +83,6 @@ Changes:
  * works with twisted 8.2.0
  * works with pygame 1.9.1 (blit failed on locked surfaces)
  * don't refuse to connect to 3.7 and 3.8 VNC servers
+2009.12.14 - 4. another update
+ * replaced crippled_des.py with pyDes
+ * TAB and BACKSPACE keys now work

@@ -72,17 +72,17 @@ even that it does what it says to do ;-)
 
 Changes:
 --------
-2003.3.3 - 1. public release
-2003.3.4 - 2. release
- * improved performance with RRE, CoRRE
- * color depth can be choosen (32, 8)
- * added "fast" option
+2009.12.14 - 4. another update
+ * replaced crippled_des.py with pyDes
+ * TAB and BACKSPACE keys now work
 2009.12.3 - 3. update
  * changed license to MIT with Chris consent as Python license
    is not supported by Google Code
  * works with twisted 8.2.0
  * works with pygame 1.9.1 (blit failed on locked surfaces)
  * don't refuse to connect to 3.7 and 3.8 VNC servers
-2009.12.14 - 4. another update
- * replaced crippled_des.py with pyDes
- * TAB and BACKSPACE keys now work
+2003.3.4 - 2. release
+ * improved performance with RRE, CoRRE
+ * color depth can be choosen (32, 8)
+ * added "fast" option
+2003.3.3 - 1. public release

@@ -11,7 +11,7 @@ used in the sample application.
 
 Usage
 -----
-You can simply start vncserver.py and it will ask for a hostname
+You can simply start vncviewer.py and it will ask for a hostname
 and password if required. Hostnames are in the "host:display"
 form, where "display" is the VNC dispaly number.
 

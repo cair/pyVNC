@@ -61,6 +61,9 @@ Bugs, etc
 References:
 -----------
 - http://homepage.hispeed.ch/py430/python/
+- http://code.google.com/p/vnc2flv/
+- http://arkaitzj.wordpress.com/2011/11/12/vnc-in-your-browser-through-websockets-handled-by-gevent/
+- http://sibson.github.io/vncdotool/
 - http://www.python.org
 - http://twistedmatrix.com/
 - http://www.pygame.org

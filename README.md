@@ -42,11 +42,11 @@ What is it good for?
 --------------------
 Nothing ;-) Use the original VNC viewer for better performance.
 
-However it works verry well and I think with a good speed.
-It could be embedded in other applications that are written
-in Python or it can be the base of various applications like
-supervision of remote desktops, automated tests of GUIs or
-be embedded in a too for remote support...
+However it works very well and I think with a good speed.
+It could be embedded in other Python applications or it can
+server as a base of various supervision or remote desktop
+applications, automated tests of GUIs or be embedded in a tool
+for remote support...
 
 Bugs, etc
 ---------
@@ -60,11 +60,11 @@ Bugs, etc
 
 References:
 -----------
-  http://code.google.com/p/python-vnc-viewer/
-  http://www.python.org
-  http://twistedmatrix.com/
-  http://www.pygame.org
-  http://www.realvnc.org
+- http://homepage.hispeed.ch/py430/python/
+- http://www.python.org
+- http://twistedmatrix.com/
+- http://www.pygame.org
+- http://www.realvnc.org
 
 -------
 (c) 2003 chris <cliechti@gmx.net>
@@ -80,6 +80,7 @@ even that it does what it says to do ;-)
 
 Changes:
 --------
+2015.08.29 - expored to Github
 2009.12.14 - 4. another update
  * replaced crippled_des.py with pyDes
  * TAB and BACKSPACE keys now work

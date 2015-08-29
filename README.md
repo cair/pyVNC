@@ -1,10 +1,10 @@
 Simple VNC viewer that is built with
 [Twisted-Python](https://twistedmatrix.com/trac/) and
 [PyGame](http://www.pygame.org/). Originally written by
-(Chris Liechti)[http://homepage.hispeed.ch/py430/python/].
+[Chris Liechti](http://homepage.hispeed.ch/py430/python/).
 
 The viewer supports the following encodings:
-  Hextile, CoRRE, RRE, RAW, CopyRect
+  `Hextile, CoRRE, RRE, RAW, CopyRect`
 
 The display is done using pygame because of it's good graphics
 performance, but any GUI system can be used as the code is
@@ -18,14 +18,14 @@ the sample application.
 
 Usage
 -----
-You can simply start vncviewer.py and it will ask for a hostname
+You can simply start `vncviewer.py` and it will ask for a hostname
 and password if required. Hostnames are in the "host:display"
 form, where "display" is the VNC dispaly number.
 
-These setting can also be passed over the command line. Note that
-it's a bad idea to pass the password on the command line as it
-can be snooped by other users with a simple process listing!
-Try -h or --help to see the possible options.
+These settings can be passed through command line, but note
+it's a bad idea to pass the password in this way as it can be
+snooped by other users with a simple process listing!
+Try `-h` or `--help` to see supported options.
 
 Please keep in mind that VNC transimts keypresses in cleartext,
 so don't type in passwords on non-encrypted connection over
@@ -33,9 +33,10 @@ insecure networks.
 
 With "--depth" a display depth can be gived, use "8" for
 slower connections.
-The "--fast" option uses only RAW and CopyRect encodings and is
-thus only suitable for fast connections. But delivers better
-performance in that case, than using the other encodings too.
+
+The "--fast" option uses only `RAW` and `CopyRect` encodings
+and is thus only suitable for fast connections. But it delivers
+better performance than other encodings.
 
 What is it good for?
 --------------------

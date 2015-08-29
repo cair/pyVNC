@@ -70,8 +70,8 @@ References:
 - http://www.realvnc.org
 
 -------
-(c) 2003 chris <cliechti@gmx.net>
-(c) 2009 techtonik <techtonik@gmail.com>
+- (c) 2003 chris <cliechti@gmx.net>
+- (c) 2009 techtonik <techtonik@gmail.com>
 
 Released under the MIT License.
 

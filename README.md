@@ -1,6 +1,7 @@
 Python VNC Viewer
-----------------
-This project uses Twisted-Python and PyGame to build a simple
+-----------------
+This project uses [Twisted-Python](https://twistedmatrix.com/trac/)
+and [PyGame](http://www.pygame.org/) to build a simple
 VNC viewer. The viewer supports the following encodings:
   Hextile, CoRRE, RRE, RAW, CopyRect
 

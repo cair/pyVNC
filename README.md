@@ -1,14 +1,20 @@
-Python VNC Viewer
------------------
-This project uses [Twisted-Python](https://twistedmatrix.com/trac/)
-and [PyGame](http://www.pygame.org/) to build a simple
-VNC viewer. The viewer supports the following encodings:
+Simple VNC viewer that is built with
+[Twisted-Python](https://twistedmatrix.com/trac/) and
+[PyGame](http://www.pygame.org/). Originally written by
+(Chris Liechti)[http://homepage.hispeed.ch/py430/python/].
+
+The viewer supports the following encodings:
   Hextile, CoRRE, RRE, RAW, CopyRect
 
-The display is done using PyGame because of it's good graphics
-performance but any GUI system can be used as the code is modular
-and can easily adapted. Clipboard transfer is supported but not
-used in the sample application.
+The display is done using pygame because of it's good graphics
+performance, but any GUI system can be used as the code is
+modular and can be easily adapted. Two good examples of code
+reuse are
+[VNC client in browser](http://arkaitzj.wordpress.com/2011/11/12/vnc-in-your-browser-through-websockets-handled-by-gevent/)
+by Arkaitz Jimenez, and most recent
+[vncdotool](https://github.com/sibson/vncdotool) by Marc Sibson.
+Pygame version supports clipboard transfer, but it's not used in
+the sample application.
 
 Usage
 -----

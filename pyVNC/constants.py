@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
-import rfb
+from pyVNC import rfb
+
 
 POINTER = tuple([(8, 8), (4, 4)] + list(pygame.cursors.compile((
     # 01234567

@@ -1,24 +1,26 @@
 from threading import Thread
-from twisted.internet import reactor
+from twisted.internet import reactor, task
 import pygame
 import time
 from pyVNC import constants
 from pyVNC.Buffer import DisplayBuffer, ArrayBuffer
 from pyVNC.VNCFactory import VNCFactory
-
+import logging
+logger = logging.getLogger("pyVNC")
 
 class Client(Thread):
-    def __init__(self, host="127.0.0.1", password=None, port=5902, depth=32, fast=False, shared=True, gui=False, gui_with_array=False):
+    def __init__(self, host="127.0.0.1", password=None, port=5902, depth=32, fast=False, shared=True, gui=False, array=False, callbacks=[]):
         Thread.__init__(self)
         pygame.init()
         self.has_gui = gui
-        self.screen = DisplayBuffer(gui_with_array) if gui else ArrayBuffer()
+        self.screen = DisplayBuffer(array) if gui else ArrayBuffer()
         self.host = host
         self.password = password
         self.port = port
         self.depth = depth
         self.fast = fast
         self.shared = shared
+        self.callbacks = callbacks
 
     def send_key(self, key, duration=0.001):
         if key in constants.MODIFIERS:
@@ -28,7 +30,7 @@ class Client(Thread):
         elif type(key) == str:
             self.screen.protocol.key_event(ord(key))
 
-        time.sleep(.001)
+        time.sleep(duration)
 
         if key in constants.MODIFIERS:
             self.screen.protocol.key_event(constants.MODIFIERS[key], down=0)
@@ -48,6 +50,11 @@ class Client(Thread):
         self.screen.protocol.pointer_event(position[0], position[1], 0)
         self.screen.protocol.pointer_event(position[0], position[1], button_id)
 
+    def add_callback(self, interval, cb):
+        l = task.LoopingCall(cb)
+        l.start(interval)
+
+
     def run_block(self):
         reactor.connectTCP(
             self.host,  # remote hostname
@@ -60,6 +67,17 @@ class Client(Thread):
                 int(self.shared),  # shared session flag
             )
         )
+
+        # Create callbacks
+        for cb_pair in self.callbacks:
+            try:
+                fps, cb = cb_pair
+                interval = fps / 1000
+                self.add_callback(interval, cb)
+
+            except:
+                logger.error("Callbacks must be formed as (fps, callback_fn)")
+
 
         # run the application
         reactor.callLater(0.1, self.screen.loop)

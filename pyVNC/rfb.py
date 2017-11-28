@@ -13,6 +13,8 @@ MIT License
 """
 
 from struct import pack, unpack
+
+from twisted.protocols.policies import TimeoutMixin
 from twisted.python import log
 from twisted.internet.protocol import Protocol
 from twisted.internet import protocol
@@ -100,12 +102,16 @@ KEY_KP_9 = 0xFFB9
 KEY_KP_Enter = 0xFF8D
 
 
-class RFBClient(Protocol):
+class RFBClient(Protocol, TimeoutMixin):
     def __init__(self):
         self._packet = []
         self._packet_len = 0
         self._handler = self._handle_initial
         self._already_expecting = 0
+
+    def timeoutConnection(self):
+        self.transport.abortConnection()
+
 
     # ------------------------------------------------------
     # states used on connection startup

@@ -28,7 +28,7 @@ class Client(Thread):
         elif key in constants.KEYMAPPINGS:
             self.screen.protocol.key_event(constants.KEYMAPPINGS[key], down=1)
         elif type(key) == str:
-            self.screen.protocol.key_event(ord(key))
+            self.screen.protocol.key_event(ord(key), down=1)
 
         time.sleep(duration)
 
@@ -36,6 +36,24 @@ class Client(Thread):
             self.screen.protocol.key_event(constants.MODIFIERS[key], down=0)
         elif key in constants.KEYMAPPINGS:
             self.screen.protocol.key_event(constants.KEYMAPPINGS[key], down=0)
+        elif type(key) == str:
+            self.screen.protocol.key_event(ord(key), down=0)
+
+    def send_press(self, key):
+        if key in constants.MODIFIERS:
+            self.screen.protocol.key_event(constants.MODIFIERS[key], down=1)
+        elif key in constants.KEYMAPPINGS:
+            self.screen.protocol.key_event(constants.KEYMAPPINGS[key], down=1)
+        elif type(key) == str:
+            self.screen.protocol.key_event(ord(key), down=1)
+
+    def send_release(self, key):
+        if key in constants.MODIFIERS:
+            self.screen.protocol.key_event(constants.MODIFIERS[key], down=0)
+        elif key in constants.KEYMAPPINGS:
+            self.screen.protocol.key_event(constants.KEYMAPPINGS[key], down=0)
+        elif type(key) == str:
+            self.screen.protocol.key_event(ord(key), down=0)
 
     def send_mouse(self, event="Left", position=(0, 0)):
         # Left 1, Middle 2, Right 3,

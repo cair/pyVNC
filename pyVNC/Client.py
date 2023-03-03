@@ -58,11 +58,11 @@ class Client(Thread):
     def send_mouse(self, event="Left", position=(0, 0)):
         # Left 1, Middle 2, Right 3,
         button_id = None
-        if event is "Left":
+        if event == "Left":
             button_id = 1
-        elif event is "Middle":
+        elif event == "Middle":
             button_id = 2
-        elif event is "Right":
+        elif event == "Right":
             button_id = 4
 
         self.screen.protocol.pointer_event(position[0], position[1], 0)
